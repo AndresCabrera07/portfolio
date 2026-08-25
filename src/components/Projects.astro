@@ -5,12 +5,13 @@ import type { ProjectProps } from "@types";
 
 interface Props {
   projects: ProjectProps[];
+  lang?: "es" | "en";
 }
 
-const { projects } = Astro.props;
+const { projects, lang = "es" } = Astro.props;
 ---
 
-<Section text="Featured Projects" href="projects">
+<Section text={lang === "es" ? "Proyectos" : "Projects"} href="projects">
   {
     projects.map(({ name, summary, image, linkPreview, linkSource }, index) => {
       const top = 98 + index * 40;
@@ -31,14 +32,14 @@ const { projects } = Astro.props;
                   target="_blank"
                   class="after:relative after:-bottom-1.25 after:content-[url(/external.svg)] hover:underline"
                 >
-                  Source
+                  {lang === "es" ? "Código" : "Source"}
                 </a>
                 <a
                   href={linkPreview}
                   target="_blank"
                   class="after:relative after:-bottom-1.25 after:content-[url(/external.svg)] hover:underline"
                 >
-                  Preview
+                  {lang === "es" ? "Ver Demo" : "Preview"}
                 </a>
               </div>
             </div>

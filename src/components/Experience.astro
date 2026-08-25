@@ -4,12 +4,13 @@ import type { ExperienceProps } from "@types";
 
 interface Props {
   experience: ExperienceProps[];
+  lang?: "es" | "en";
 }
 
-const { experience } = Astro.props;
+const { experience, lang = "es" } = Astro.props;
 ---
 
-<Section text="Work Experience" href="experience">
+<Section text={lang === "es" ? "Experiencia Laboral" : "Work Experience"} href="experience">
   {
     experience.map(({ company, position, startDate, endDate, summary }) => (
       <div class="mb-10">

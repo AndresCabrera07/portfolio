@@ -6,23 +6,22 @@ import Experience from "@components/Experience.astro";
 import Projects from "@components/Projects.astro";
 import About from "@components/About.astro";
 
-import "../styles/global.css";
+import "../../styles/global.css";
 
-const content = SITE_CONTENT.es;
+const content = SITE_CONTENT.en;
 ---
 
-<Layout lang="es">
-  <!-- Selector flotante de idioma -->
+<Layout lang="en">
   <div class="lang-switch-container">
-    <span class="active-lang">ES</span>
+    <a href="/" class="lang-link">ES</a>
     <span>/</span>
-    <a href="/en" class="lang-link">EN</a>
+    <span class="active-lang">EN</span>
   </div>
 
-  <Hero {...content.hero} lang="es" />
-  <Experience experience={content.experience} lang="es" />
-  <Projects projects={content.projects} lang="es" />
-  <About {...content.about} name={content.hero.name} lang="es" />
+  <Hero {...content.hero} lang="en" />
+  <Experience experience={content.experience} lang="en" />
+  <Projects projects={content.projects} lang="en" />
+  <About {...content.about} name={content.hero.name} lang="en" />
 </Layout>
 
 <style>

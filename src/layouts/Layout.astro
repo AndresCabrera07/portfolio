@@ -4,17 +4,27 @@ import { Font } from "astro:assets";
 import { SITE_CONFIG } from "@config";
 import Footer from "@components/Footer.astro";
 
+interface Props {
+  lang?: "es" | "en";
+}
+
+const { lang = "es" } = Astro.props;
+const config = SITE_CONFIG[lang];
+
 const {
   title,
   description,
   siteLogo,
   navLinks,
-  lang,
   author,
   socialLinks,
   socialImage,
-  canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
-} = SITE_CONFIG;
+} = config;
+
+const canonicalURL = new URL(
+  Astro.url.pathname,
+  Astro.site || config.canonicalURL
+).href;
 
 const ogImgUrl = canonicalURL + socialImage;
 ---

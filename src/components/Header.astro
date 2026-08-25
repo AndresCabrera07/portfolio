@@ -13,7 +13,7 @@ const { siteLogo, navLinks } = Astro.props;
 >
   <a href="/" aria-label="Home link">
     <Image
-      class="rounded-full"
+      class="rounded-full object-cover"
       src={siteLogo}
       width="45"
       height="45"
@@ -38,16 +38,24 @@ const { siteLogo, navLinks } = Astro.props;
   >
     <ul class="gap-2 sm:flex">
       {
-        navLinks.map((link) => (
-          <li class="relative">
-            <a
-              class={`nav-item relative block p-2 text-sm font-medium transition-all duration-500 after:absolute after:bottom-0 after:left-2/4 after:h-2 after:w-1 after:-translate-x-2/4 after:text-primary after:opacity-0 after:content-['•'] hover:text-white`}
-              href={link.href}
-            >
-              {link.text}
-            </a>
-          </li>
-        ))
+        navLinks.map((link) => {
+          const isPdf = link.href.endsWith(".pdf");
+          return (
+            <li class="relative">
+              <a
+                class={`nav-item relative block p-2 text-sm font-medium transition-all duration-500 after:absolute after:bottom-0 after:left-2/4 after:h-2 after:w-1 after:-translate-x-2/4 after:text-primary after:opacity-0 after:content-['•'] hover:text-white ${
+                  isPdf ? "text-primary font-semibold hover:text-white" : ""
+                }`}
+                href={link.href}
+                target={isPdf ? "_blank" : undefined}
+                download={isPdf ? "HV_Andres_Cabrera.pdf" : undefined}
+                rel={isPdf ? "noopener noreferrer" : undefined}
+              >
+                {link.text}
+              </a>
+            </li>
+          );
+        })
       }
     </ul>
   </nav>
@@ -67,7 +75,11 @@ const { siteLogo, navLinks } = Astro.props;
 
   button?.addEventListener("click", toggleMenu);
   navItems.forEach((item) => {
-    item?.addEventListener("click", toggleMenu);
+    item?.addEventListener("click", () => {
+      if (!menu?.classList.contains("hidden") && window.innerWidth < 640) {
+        toggleMenu();
+      }
+    });
   });
 
   // Update navigation based on scroll position with Intersection Observer
@@ -78,7 +90,7 @@ const { siteLogo, navLinks } = Astro.props;
           navItems.forEach((item) => {
             if (item.getAttribute("href") === `#${entry.target.id}`) {
               item.classList.add("text-white", "md:after:opacity-100");
-            } else {
+            } else if (item.getAttribute("href")?.startsWith("#")) {
               item.classList.remove("text-white", "md:after:opacity-100");
             }
           });
