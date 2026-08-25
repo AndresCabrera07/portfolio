@@ -12,45 +12,8 @@ const content = SITE_CONTENT.es;
 ---
 
 <Layout lang="es">
-  <!-- Selector flotante de idioma -->
-  <div class="lang-switch-container">
-    <span class="active-lang">ES</span>
-    <span>/</span>
-    <a href="/en" class="lang-link">EN</a>
-  </div>
-
   <Hero {...content.hero} lang="es" />
   <Experience experience={content.experience} lang="es" />
   <Projects projects={content.projects} lang="es" />
   <About {...content.about} name={content.hero.name} lang="es" />
 </Layout>
-
-<style>
-  .lang-switch-container {
-    position: fixed;
-    top: 20px;
-    right: 25px;
-    z-index: 50;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(30, 41, 59, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(8px);
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 0.85rem;
-    font-weight: 700;
-  }
-  .active-lang {
-    color: #6366f1;
-  }
-  .lang-link {
-    color: #94a3b8;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  .lang-link:hover {
-    color: #ffffff;
-  }
-</style>
