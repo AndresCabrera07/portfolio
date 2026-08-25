@@ -1,27 +1,32 @@
 ---
 import type { HeroProps } from "@types";
-type Props = HeroProps;
+
+interface Props extends HeroProps {
+  lang?: "es" | "en";
+}
 
 const { name, specialty, summary, email, lang = "es" } = Astro.props;
 ---
 
-<section class="py-24 md:py-32" id="#hero">
-  <h1
-    class="mb-1.5 font-serif text-7xl font-bold tracking-tightest text-white sm:text-8xl md:mb-0 md:text-9xl"
-  >
-    {name}
-  </h1>
-  <p
-    class="mb-9 font-serif text-4xl leading-11.5 font-bold tracking-tighter text-primary sm:text-5xl md:text-6xl"
-  >
-    {specialty}
-  </p>
-  <p class="mb-16 text-base font-normal text-neutral md:text-lg">
-    {summary}
-  </p>
+<section class="py-16 md:py-24 flex flex-col items-start gap-6">
+  <div class="space-y-3 max-w-2xl">
+    <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-white">
+      {name}
+    </h1>
+    <h2 class="text-2xl md:text-3xl font-semibold text-primary">
+      {specialty}
+    </h2>
+    <p class="text-base md:text-lg text-neutral leading-relaxed pt-2">
+      {summary}
+    </p>
+  </div>
 
-  <a href={`mailto:${email}`} class="...">
-  {lang === "es" ? "Contáctame" : "Get in Touch"}
-  </a>
-  >
+  <div class="pt-4">
+    <a
+      href={`mailto:${email}`}
+      class="inline-flex items-center justify-center rounded-xl bg-primary px-6 py-3 text-sm md:text-base font-semibold text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:bg-primary/90 hover:scale-105 active:scale-95"
+    >
+      {lang === "es" ? "Contáctame" : "Get in Touch"}
+    </a>
+  </div>
 </section>
